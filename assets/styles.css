@@ -466,7 +466,7 @@ h3 {
 .stat-card > * + *,
 .figure-panel > * + *,
 .table-head > * + * {
-  margin-top: 0.75rem;
+  margin-top: 0.62rem;
 }
 
 .check-list li,
@@ -487,7 +487,7 @@ h3 {
 .feature-card > .card-kicker,
 .portal-card > .portal-label,
 .stat-card > .stat-label {
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.56rem;
 }
 
 .portal-link {
@@ -504,6 +504,15 @@ h3 {
 .split-copy {
   display: grid;
   gap: 1rem;
+}
+
+.figure-single {
+  display: block;
+}
+
+.figure-panel.figure-panel-narrow {
+  width: min(70%, 52rem);
+  margin: 0 auto;
 }
 
 .figure-panel img {
@@ -802,6 +811,10 @@ th {
   .button,
   .button.primary,
   .button.secondary {
+    width: 100%;
+  }
+
+  .figure-panel.figure-panel-narrow {
     width: 100%;
   }
 

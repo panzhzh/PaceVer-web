@@ -425,7 +425,7 @@
           </p>
         </div>
 
-        <div class="media-grid three-up">
+        <div class="dual-grid">
           <figure class="figure-panel">
             <img src="../assets/images/temporal-alignment.svg" alt="Temporal alignment delta figure">
             <figcaption>Shared temporal priors reduce cross-module temporal misalignment.</figcaption>
@@ -434,24 +434,18 @@
             <img src="../assets/images/distance-analysis.svg" alt="Distance analysis figure">
             <figcaption>Gains persist beyond immediate adjacency, especially in sparse supervision bins.</figcaption>
           </figure>
+        </div>
+
+        <div class="dual-grid" style="margin-top: 1rem;">
           <figure class="figure-panel">
             <img src="../assets/images/missing-modality.svg" alt="Missing modality robustness figure">
             <figcaption>Dialogue-paced temporal priors stay useful when modality availability degrades.</figcaption>
           </figure>
-        </div>
-
-        <div class="dual-grid" style="margin-top: 1rem;">
           <figure class="figure-panel">
             <img src="../assets/images/paceext-data-efficiency.png" alt="PaceExt data efficiency figure">
             <figcaption>
               Data efficiency on ECF: larger gains under low-data fractions indicate that the
               dialogue-paced prior remains useful when supervision is scarce.
-            </figcaption>
-          </figure>
-          <figure class="figure-panel">
-            <img src="../assets/images/paceext-case-study.svg" alt="PaceExt case study figure">
-            <figcaption>
-              Pair-level case study showing how dialogue-adaptive temporal decay changes pair ranking.
             </figcaption>
           </figure>
         </div>
@@ -467,6 +461,15 @@
             <img src="../assets/images/paceext-psi-noise.png" alt="PaceExt robustness to corrupted dialogue pace statistics">
             <figcaption>
               Inference-only corruption of dialogue pace statistics causes graceful rather than catastrophic degradation.
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="figure-single" style="margin-top: 1rem;">
+          <figure class="figure-panel figure-panel-narrow">
+            <img src="../assets/images/paceext-case-study.svg" alt="PaceExt case study figure">
+            <figcaption>
+              Pair-level case study showing how dialogue-adaptive temporal decay changes pair ranking.
             </figcaption>
           </figure>
         </div>
