@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PaceExt | PaceVer</title>
+  <meta
+    name="description"
+    content="PaceExt is the extractor layer of PaceVer, focused on dialogue-paced temporal modeling for multimodal emotion-cause pair extraction."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body data-theme="ext">
+  <div class="page-shell">
+    <header class="site-header surface">
+      <a class="brand" href="../" aria-label="PaceVer home">
+        <span class="brand-mark">PV</span>
+        <span class="brand-copy">
+          <strong>PaceVer</strong>
+          <span>research portal</span>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a class="nav-link" href="../">Home</a>
+        <a class="nav-link" href="./" aria-current="page">PaceExt</a>
+        <a class="nav-link" href="../bridge/">BridgeProt</a>
+        <a class="nav-link" href="../survey/">Survey</a>
+      </nav>
+      <a class="nav-cta" href="https://github.com/panzhzh/PaceVer-web" target="_blank" rel="noreferrer">Site Repo</a>
+    </header>
+
+    <main class="page-main">
+      <section class="hero surface reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">Implemented extractor</p>
+          <h1 class="hero-title">PaceExt</h1>
+          <p class="lead">
+            PaceExt is the strongest public-facing PaceVer component today. It keeps MECPE as a
+            structured pair extraction problem while aligning temporal priors across modules instead
+            of letting each module learn incompatible recency behavior.
+          </p>
+          <p class="hero-note">
+            In the paper-facing manuscript this layer appears under the <strong>ATDG + DP</strong>
+            and <strong>TRecAM</strong> naming. At the thesis level it is the extractor foundation
+            that later feeds BridgeProt and ReaVer.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#results">See results</a>
+            <a class="button secondary" href="#architecture">See architecture</a>
+            <a class="button secondary" href="../bridge/">Go to BridgeProt</a>
+          </div>
+          <div class="chip-row" aria-label="PaceExt themes">
+            <span>Dialogue pace statistics</span>
+            <span>Shared temporal horizon</span>
+            <span>Pair-preserving training</span>
+          </div>
+        </div>
+
+        <aside class="hero-panel">
+          <article class="stat-card surface-subtle">
+            <span class="stat-label">Pair F1</span>
+            <strong class="stat-value">57.92</strong>
+            <p>Reported on ECF in the current full multimodal thesis-facing result table.</p>
+          </article>
+          <article class="stat-card surface-subtle">
+            <span class="stat-label">Absolute gain</span>
+            <strong class="stat-value">+2.47</strong>
+            <p>Improvement over the strongest published baseline in the same setting.</p>
+          </article>
+          <article class="stat-card surface-subtle">
+            <span class="stat-label">Pair recall</span>
+            <strong class="stat-value">65.12</strong>
+            <p>High recall is especially important because later reasoning stages should not start from a weak pair base.</p>
+          </article>
+        </aside>
+      </section>
+
+      <section class="section reveal" id="method">
+        <div class="section-header">
+          <p class="eyebrow">Core Design</p>
+          <h2>Three design decisions define the extractor</h2>
+        </div>
+
+        <div class="card-grid three-up">
+          <article class="feature-card">
+            <span class="card-kicker">ATDG</span>
+            <h3>Dialogue-paced temporal scale</h3>
+            <p>
+              Label-free dialogue pace statistics are turned into a dialogue-level timescale instead
+              of relying on a fixed temporal bias shared across all conversations.
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="card-kicker">DP</span>
+            <h3>Shared temporal injection</h3>
+            <p>
+              Sequential aggregation and speaker interaction receive one coordinated temporal prior
+              so that the modules do not drift into inconsistent recency assumptions.
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="card-kicker">Training schedule</span>
+            <h3>Protect the pair scorer</h3>
+            <p>
+              A pair-preserving two-stage schedule prevents the structured link objective from being
+              destabilized by the auxiliary multi-task heads.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal" id="architecture">
+        <div class="section-header">
+          <p class="eyebrow">Architecture</p>
+          <h2>The public method view still starts from structured pair extraction</h2>
+        </div>
+
+        <div class="dual-grid">
+          <div class="split-copy">
+            <article class="feature-card">
+              <span class="card-kicker">Why this matters</span>
+              <h3>Temporal consistency is the main constraint</h3>
+              <p>
+                Modular MECPE systems often mix long-range sequential smoothing with local
+                interaction graphs. PaceExt treats the inconsistency between those temporal views as
+                a first-order modeling issue rather than a side effect to ignore.
+              </p>
+            </article>
+            <article class="feature-card">
+              <span class="card-kicker">Thesis role</span>
+              <h3>Extractor first, reasoning later</h3>
+              <p>
+                PaceVer does not replace the extractor with a fully generative system. The extractor
+                remains the anchor layer, and later pages on this site build on top of it.
+              </p>
+            </article>
+          </div>
+
+          <figure class="figure-panel">
+            <img src="../assets/images/paceext-overview.svg" alt="Overview of the PaceExt architecture">
+            <figcaption>
+              PaceExt overview reused from the current TRecAM manuscript asset pool.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section reveal" id="results">
+        <div class="section-header">
+          <p class="eyebrow">Results</p>
+          <h2>Current public quantitative anchor</h2>
+          <p>
+            These are the results currently surfaced on the public site because the extractor is the
+            most mature PaceVer component. The naming in the table matches the paper-facing
+            manuscript.
+          </p>
+        </div>
+
+        <div class="banner-card">
+          <div>
+            <h3>What to read from this table</h3>
+            <p>
+              The strongest result is not just a marginal F1 gain. The extractor also raises recall
+              and supplies the stable pair structure that later bridgeable explanations can rely on.
+            </p>
+          </div>
+          <div class="badge-row" aria-label="Result highlights">
+            <span>Best public PaceVer-side number</span>
+            <span>Full multimodal setting</span>
+            <span>3-seed reporting</span>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-head">
+            <h3>ECF test-set comparison</h3>
+            <p>Selected pair extraction results from the full multimodal setting reported in the thesis.</p>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>Modalities</th>
+                  <th>Pair Precision</th>
+                  <th>Pair Recall</th>
+                  <th>Pair F1</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>MECPE-2steps</td>
+                  <td>Audio + Video</td>
+                  <td>57.47</td>
+                  <td>49.81</td>
+                  <td>53.20</td>
+                </tr>
+                <tr>
+                  <td>HiLo</td>
+                  <td>Audio + Video</td>
+                  <td>51.78</td>
+                  <td>59.69</td>
+                  <td>55.45</td>
+                </tr>
+                <tr>
+                  <td>ATDG + DP (PaceExt)</td>
+                  <td>Text-only</td>
+                  <td>53.12</td>
+                  <td>61.22</td>
+                  <td>56.88</td>
+                </tr>
+                <tr class="highlight-row">
+                  <td>ATDG + DP (PaceExt)</td>
+                  <td>Audio + Video</td>
+                  <td>52.16</td>
+                  <td>65.12</td>
+                  <td>57.92</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-note">
+            Naming note: the extractor is referred to as ATDG + DP / TRecAM in the current paper
+            manuscript and as PaceExt in the thesis-level project structure.
+          </p>
+        </div>
+      </section>
+
+      <section class="section reveal" id="figures">
+        <div class="section-header">
+          <p class="eyebrow">Evidence</p>
+          <h2>The results are not only one scalar</h2>
+          <p>
+            The most useful reading of PaceExt is mechanistic: lower temporal misalignment, better
+            behavior beyond immediate adjacency, and stronger tolerance when modality coverage drops.
+          </p>
+        </div>
+
+        <div class="media-grid three-up">
+          <figure class="figure-panel">
+            <img src="../assets/images/temporal-alignment.svg" alt="Temporal alignment delta figure">
+            <figcaption>Shared temporal priors reduce cross-module temporal misalignment.</figcaption>
+          </figure>
+          <figure class="figure-panel">
+            <img src="../assets/images/distance-analysis.svg" alt="Distance analysis figure">
+            <figcaption>Gains persist beyond immediate adjacency, especially in sparse supervision bins.</figcaption>
+          </figure>
+          <figure class="figure-panel">
+            <img src="../assets/images/missing-modality.svg" alt="Missing modality robustness figure">
+            <figcaption>Dialogue-paced temporal priors stay useful when modality availability degrades.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section reveal" id="position">
+        <div class="section-header">
+          <p class="eyebrow">Position in PaceVer</p>
+          <h2>PaceExt is the base, not the whole story</h2>
+        </div>
+
+        <div class="card-grid two-up">
+          <article class="feature-card">
+            <span class="card-kicker">Feeds BridgeProt</span>
+            <h3>Extractor outputs need an interface</h3>
+            <p>
+              Strong pair scores alone do not answer how explanations should be emitted, checked, and
+              compared. That is why the next public page is the BridgeProt protocol layer.
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="card-kicker">Feeds ReaVer</span>
+            <h3>Reasoning should start from fixed structure</h3>
+            <p>
+              The thesis-stage reasoning layer is intentionally downstream of the extractor, not a
+              replacement for it. High-quality pair proposals remain the control surface.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer surface reveal">
+      <div>
+        <strong>PaceExt</strong>
+        <p>The extractor layer of PaceVer and the current public quantitative anchor.</p>
+      </div>
+      <div class="footer-links">
+        <a href="../">Home</a>
+        <a href="../bridge/">BridgeProt</a>
+        <a href="../survey/">Survey</a>
+        <a href="https://github.com/panzhzh/PaceVer-web" target="_blank" rel="noreferrer">Site repository</a>
+      </div>
+      <p class="footer-meta">Website snapshot <span class="js-year"></span>. Built for GitHub Pages.</p>
+    </footer>
+  </div>
+
+  <script src="../assets/app.js"></script>
+</body>
+</html>

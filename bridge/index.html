@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BridgeProt | PaceVer</title>
+  <meta
+    name="description"
+    content="BridgeProt is the explanation interface and evaluation contract in PaceVer, focused on parse-back compatible, auditable outputs."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body data-theme="bridge">
+  <div class="page-shell">
+    <header class="site-header surface">
+      <a class="brand" href="../" aria-label="PaceVer home">
+        <span class="brand-mark">PV</span>
+        <span class="brand-copy">
+          <strong>PaceVer</strong>
+          <span>research portal</span>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a class="nav-link" href="../">Home</a>
+        <a class="nav-link" href="../ext/">PaceExt</a>
+        <a class="nav-link" href="./" aria-current="page">BridgeProt</a>
+        <a class="nav-link" href="../survey/">Survey</a>
+      </nav>
+      <a class="nav-cta" href="https://github.com/panzhzh/PaceVer-web" target="_blank" rel="noreferrer">Site Repo</a>
+    </header>
+
+    <main class="page-main">
+      <section class="hero surface reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">Interface and evaluation contract</p>
+          <h1 class="hero-title">BridgeProt</h1>
+          <p class="lead">
+            BridgeProt is the protocol layer of PaceVer. It asks a basic question that pair
+            extraction papers and free-text rationale systems usually leave unresolved: can an
+            explanation be emitted in a form that is still stable enough to parse back into
+            structured pair outputs?
+          </p>
+          <p class="hero-note">
+            The first goal of BridgeProt is not to serve one specific model. It is to define a
+            model-agnostic, minimal explanation object whose evidence pointers remain auditable and
+            whose outputs can be compared with pair-level metrics.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#schema">See BL-1 schema</a>
+            <a class="button secondary" href="#metrics">See metrics</a>
+            <a class="button secondary" href="../survey/">See survey context</a>
+          </div>
+          <div class="chip-row" aria-label="BridgeProt themes">
+            <span>Model-agnostic protocol</span>
+            <span>Deterministic parse-back</span>
+            <span>Auditable explanations</span>
+          </div>
+        </div>
+
+        <aside class="hero-panel">
+          <article class="stat-card surface-subtle">
+            <span class="stat-label">Target interface</span>
+            <strong class="stat-value">BL-1</strong>
+            <p>Text plus explicit evidence pointers rather than pointer-free rationales.</p>
+          </article>
+          <article class="stat-card surface-subtle">
+            <span class="stat-label">First milestone</span>
+            <strong class="stat-value">Parse-back</strong>
+            <p>`LLM output -> parse-back -> Pair-F1` is the smallest protocol-level closed loop.</p>
+          </article>
+          <article class="stat-card surface-subtle">
+            <span class="stat-label">Scope</span>
+            <strong class="stat-value">Model-agnostic</strong>
+            <p>The protocol should stand even when PaceExt is not used upstream.</p>
+          </article>
+        </aside>
+      </section>
+
+      <section class="section reveal" id="why">
+        <div class="section-header">
+          <p class="eyebrow">Why a bridge layer</p>
+          <h2>Three failure modes force this page to exist</h2>
+        </div>
+
+        <div class="card-grid three-up">
+          <article class="feature-card">
+            <span class="card-kicker">Pair-only output</span>
+            <h3>Accurate but opaque</h3>
+            <p>
+              Structured pair prediction tells you where the model points, but not how a human should
+              inspect or verbalize that evidence.
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="card-kicker">Free-text rationale</span>
+            <h3>Readable but slippery</h3>
+            <p>
+              Fluent explanations are easy to write and easy to over-credit. Without explicit
+              pointers, it is unclear what evidence the text actually commits to.
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="card-kicker">Evaluation fracture</span>
+            <h3>No common comparison layer</h3>
+            <p>
+              Pair extraction and generation end up being judged under different metrics unless there
+              is an explicit interface connecting one output space back to the other.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal" id="schema">
+        <div class="section-header">
+          <p class="eyebrow">BL-1 schema</p>
+          <h2>The minimal object is intentionally small</h2>
+          <p>
+            BridgeProt starts from a minimal schema so that the protocol can be tested before adding
+            richer metadata. The first question is whether the object is valid, parseable, and
+            evaluable, not whether it is maximally expressive.
+          </p>
+        </div>
+
+        <div class="dual-grid">
+          <article class="code-card">
+            <h3>Minimal BL-1 object</h3>
+            <pre><code>{
+  "emotion_turn": 7,
+  "evidence": [3, 5],
+  "bridge": "optional or null",
+  "explanation": "free-form text"
+}</code></pre>
+            <div class="formula">{ (emotion_turn, c) | c in evidence }</div>
+          </article>
+
+          <div class="split-copy">
+            <article class="feature-card">
+              <span class="card-kicker">Hard constraints</span>
+              <ul class="check-list">
+                <li>`emotion_turn` is one target emotion turn.</li>
+                <li>`evidence` is sorted, deduplicated, and temporally legal.</li>
+                <li>`bridge` may be `null`, but the evidence pointers must stay machine-readable.</li>
+                <li>`explanation` is free text, but it no longer carries the whole burden of audit.</li>
+              </ul>
+            </article>
+
+            <article class="milestone-card">
+              <strong>First milestone</strong>
+              <p>
+                The protocol is only convincing if a system can emit this object, pass validation,
+                parse back to a pair set, and report Pair-F1 plus parsability.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="case">
+        <div class="section-header">
+          <p class="eyebrow">Case view</p>
+          <h2>Bridgeable text is still anchored to explicit evidence</h2>
+        </div>
+
+        <div class="dual-grid">
+          <figure class="figure-panel">
+            <img src="../assets/images/bridgeprot-case.svg" alt="Example BridgeProt case diagram">
+            <figcaption>
+              The bridge layer is useful only if it keeps explanations tied to explicit evidence
+              pointers that survive downstream checking.
+            </figcaption>
+          </figure>
+
+          <div class="split-copy">
+            <article class="feature-card">
+              <span class="card-kicker">Not just nicer wording</span>
+              <h3>Interface quality changes what can be evaluated</h3>
+              <p>
+                Once evidence pointers are explicit, the same output can be audited for validity,
+                parsed back to pair predictions, and compared against structured supervision.
+              </p>
+            </article>
+            <article class="feature-card">
+              <span class="card-kicker">Why BL-1 matters</span>
+              <h3>Free text becomes testable</h3>
+              <p>
+                BridgeProt keeps human-readable explanation text, but refuses to let the text float
+                free of evidence objects. That is the whole point of the protocol.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="layers">
+        <div class="section-header">
+          <p class="eyebrow">Layer separation</p>
+          <h2>BridgeProt, TurnProposal, and ReaVer are not the same thing</h2>
+        </div>
+
+        <div class="card-grid three-up">
+          <article class="feature-card">
+            <span class="card-kicker">Protocol</span>
+            <h3>BridgeProt</h3>
+            <p>
+              Defines the BL-1 object, validity constraints, parse-back rule, and public evaluation
+              interface. It must stand independently of PaceExt.
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="card-kicker">Upstream prior</span>
+            <h3>TurnProposal</h3>
+            <p>
+              A structured candidate proposal mechanism is useful, but it is not part of the
+              protocol. It is an optional constraint source for downstream methods.
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="card-kicker">Reasoning method</span>
+            <h3>ReaVer</h3>
+            <p>
+              ReaVer is an enhancement layer on top of the protocol. It uses structure, verification,
+              and adaptive expansion, but it is not the protocol definition itself.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal" id="metrics">
+        <div class="section-header">
+          <p class="eyebrow">Metrics and checks</p>
+          <h2>What BridgeProt wants reported</h2>
+          <p>
+            The protocol is not only a schema. It is also a reporting contract that keeps output
+            validity, parsability, and pair-level correctness separate.
+          </p>
+        </div>
+
+        <div class="card-grid two-up">
+          <article class="feature-card">
+            <span class="card-kicker">Structural check</span>
+            <h3>Parsability</h3>
+            <p>
+              Can the explanation object be parsed into the declared schema without crashing or
+              inventing missing fields?
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="card-kicker">Validity check</span>
+            <h3>Strict and salvaged validity</h3>
+            <p>
+              Separate fully valid objects from objects that become usable only after repair or
+              post-processing.
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="card-kicker">Pair-level check</span>
+            <h3>Parse-back Pair-F1</h3>
+            <p>
+              Convert evidence pointers into pair sets and score them under the same structural
+              metric family used for extraction.
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="card-kicker">Protocol diagnostics</span>
+            <h3>Evidence consistency</h3>
+            <p>
+              Diagnose whether the text, evidence list, and temporal constraints agree with one
+              another rather than only sounding plausible.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal" id="routes">
+        <div class="section-header">
+          <p class="eyebrow">Implementation routes</p>
+          <h2>Two ways to test the protocol</h2>
+        </div>
+
+        <div class="callout-grid">
+          <article class="feature-card">
+            <span class="card-kicker">Route A</span>
+            <h3>Independent protocol validation</h3>
+            <p>
+              Use dialogue context and a target emotion turn, ask an LLM to emit BL-1, then report
+              parsability and parse-back Pair-F1. This route proves the protocol can stand on its own.
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="card-kicker">Route B</span>
+            <h3>PaceExt-conditioned enhancement</h3>
+            <p>
+              Add structured proposals from the extractor to constrain reasoning. This is where the
+              protocol becomes the evaluation bridge for stronger downstream systems such as ReaVer.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer surface reveal">
+      <div>
+        <strong>BridgeProt</strong>
+        <p>The interface and evaluation bridge between pair extraction and auditable explanations.</p>
+      </div>
+      <div class="footer-links">
+        <a href="../">Home</a>
+        <a href="../ext/">PaceExt</a>
+        <a href="../survey/">Survey</a>
+        <a href="https://github.com/panzhzh/PaceVer-web" target="_blank" rel="noreferrer">Site repository</a>
+      </div>
+      <p class="footer-meta">Website snapshot <span class="js-year"></span>. Built for GitHub Pages.</p>
+    </footer>
+  </div>
+
+  <script src="../assets/app.js"></script>
+</body>
+</html>

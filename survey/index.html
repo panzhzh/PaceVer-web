@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Survey | PaceVer</title>
+  <meta
+    name="description"
+    content="Survey page for multimodal emotion causality in conversations, covering datasets, taxonomies, generation interfaces, and the Bridging Protocol."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body data-theme="survey">
+  <div class="page-shell">
+    <header class="site-header surface">
+      <a class="brand" href="../" aria-label="PaceVer home">
+        <span class="brand-mark">PV</span>
+        <span class="brand-copy">
+          <strong>PaceVer</strong>
+          <span>research portal</span>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a class="nav-link" href="../">Home</a>
+        <a class="nav-link" href="../ext/">PaceExt</a>
+        <a class="nav-link" href="../bridge/">BridgeProt</a>
+        <a class="nav-link" href="./" aria-current="page">Survey</a>
+      </nav>
+      <a class="nav-cta" href="https://github.com/panzhzh/PaceVer-web" target="_blank" rel="noreferrer">Site Repo</a>
+    </header>
+
+    <main class="page-main">
+      <section class="hero surface reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">Field map and framing paper</p>
+          <h1 class="hero-title">Survey</h1>
+          <p class="lead">
+            The survey page turns one of the strongest broader assets in the PaceVer workspace into a
+            public-facing entry point: <strong>from pair extraction to grounded, verifiable
+            explanations in multimodal conversations</strong>.
+          </p>
+          <p class="hero-note">
+            This page is useful because it does not only summarize prior work. It explains why
+            BridgeProt is necessary, where current datasets permit real auditing, and how extraction
+            and generation should be compared without collapsing them into one blurry metric story.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#rqs">See the RQs</a>
+            <a class="button secondary" href="#resources">See datasets</a>
+            <a class="button secondary" href="../bridge/">See BridgeProt</a>
+          </div>
+          <div class="chip-row" aria-label="Survey themes">
+            <span>Evidence grounding</span>
+            <span>Capability matrix</span>
+            <span>Pair taxonomy</span>
+            <span>Bridgeability map</span>
+          </div>
+        </div>
+
+        <aside class="hero-panel">
+          <article class="stat-card surface-subtle">
+            <span class="stat-label">Research questions</span>
+            <strong class="stat-value">5</strong>
+            <p>The manuscript is organized around five linked questions rather than a loose literature dump.</p>
+          </article>
+          <article class="stat-card surface-subtle">
+            <span class="stat-label">Survey period</span>
+            <strong class="stat-value">2023-2026</strong>
+            <p>Current systematic search window described in the manuscript methodology section.</p>
+          </article>
+          <article class="stat-card surface-subtle">
+            <span class="stat-label">Interface framing</span>
+            <strong class="stat-value">BL-0 to BL-2</strong>
+            <p>Generation outputs are grouped by what can actually be audited, not only by fluency.</p>
+          </article>
+        </aside>
+      </section>
+
+      <section class="section reveal" id="why">
+        <div class="section-header">
+          <p class="eyebrow">Why this survey</p>
+          <h2>The gap is not “more papers.” The gap is evaluation logic.</h2>
+          <p>
+            Existing emotion-cause surveys are useful, but they largely stop at textual extraction,
+            treat pair prediction as the endpoint, or mention multimodality only as a trend. This
+            survey argues that the missing unit of analysis is the output interface itself.
+          </p>
+        </div>
+
+        <div class="card-grid two-up">
+          <article class="feature-card">
+            <span class="card-kicker">Limitations of earlier surveys</span>
+            <ul class="check-list">
+              <li>Mostly text-only rather than systematic multimodal dialogue treatment.</li>
+              <li>Pair extraction is treated as the endpoint instead of the anchor for explanation.</li>
+              <li>No explicit evaluation bridge from free-text outputs back to evidence objects.</li>
+              <li>Generation is discussed as a capability, but verification is under-specified.</li>
+            </ul>
+          </article>
+          <article class="feature-card">
+            <span class="card-kicker">What this survey adds</span>
+            <ul class="check-list">
+              <li>A unifying evidence-grounding view across extraction and explanation.</li>
+              <li>A capability-first benchmark matrix.</li>
+              <li>A mechanism-centered taxonomy for pair extraction.</li>
+              <li>A bridgeability-first map for generated rationales.</li>
+              <li>A Bridging Protocol for reproducible cross-interface comparison.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal" id="rqs">
+        <div class="section-header">
+          <p class="eyebrow">Research Questions</p>
+          <h2>Five RQs structure the manuscript</h2>
+        </div>
+
+        <div class="card-grid three-up">
+          <article class="feature-card">
+            <span class="card-kicker">RQ1</span>
+            <h3>Unifying links and explanations</h3>
+            <p>What makes both pair outputs and explanations part of one evidence-grounding problem?</p>
+          </article>
+          <article class="feature-card">
+            <span class="card-kicker">RQ2</span>
+            <h3>Auditable resources</h3>
+            <p>Which datasets actually expose evidence units that can support verification?</p>
+          </article>
+          <article class="feature-card">
+            <span class="card-kicker">RQ3</span>
+            <h3>Pair-extraction paradigms</h3>
+            <p>How do current methods represent multimodal evidence and where do their failures arise?</p>
+          </article>
+          <article class="feature-card">
+            <span class="card-kicker">RQ4</span>
+            <h3>Bridgeable rationales</h3>
+            <p>Which generation designs emit explicit evidence pointers rather than only fluent text?</p>
+          </article>
+          <article class="feature-card">
+            <span class="card-kicker">RQ5</span>
+            <h3>Reproducible evaluation</h3>
+            <p>How should systems be compared across output interfaces without metric drift?</p>
+          </article>
+          <article class="feature-card">
+            <span class="card-kicker">Contribution</span>
+            <h3>Bridge the field map to PaceVer</h3>
+            <p>The survey is not separate from PaceVer. It provides the public conceptual justification for BridgeProt.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal" id="roadmap">
+        <div class="section-header">
+          <p class="eyebrow">Roadmap figures</p>
+          <h2>The survey already has strong visual structure</h2>
+        </div>
+
+        <div class="dual-grid">
+          <figure class="figure-panel">
+            <img src="../assets/images/survey-overview.svg" alt="Survey overview figure">
+            <figcaption>Roadmap figure: from pair extraction to grounded and verifiable explanations.</figcaption>
+          </figure>
+          <figure class="figure-panel">
+            <img src="../assets/images/evolution-landscape.svg" alt="Evolution landscape of emotion causality tasks">
+            <figcaption>Task evolution from extraction-focused settings toward multimodal conversational grounding.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section reveal" id="methodology">
+        <div class="section-header">
+          <p class="eyebrow">Methodology snapshot</p>
+          <h2>Systematic rather than impressionistic</h2>
+          <p>
+            The manuscript follows a PRISMA-style review pipeline and currently targets literature
+            from January 2023 to January 2026 across major NLP, multimodal learning, and HCI sources.
+          </p>
+        </div>
+
+        <div class="dual-grid">
+          <article class="feature-card">
+            <span class="card-kicker">Search protocol</span>
+            <ul class="check-list">
+              <li>Targets emotion causality, conversations, and multimodality jointly.</li>
+              <li>Separates conversational MEC benchmarks from auxiliary emotion explanation resources.</li>
+              <li>Codes papers for task, output interface, evaluation style, and limitations.</li>
+            </ul>
+          </article>
+          <figure class="figure-panel">
+            <img src="../assets/images/prisma-flowchart.svg" alt="PRISMA flowchart figure">
+            <figcaption>Survey methodology is described as a PRISMA-style selection pipeline.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section reveal" id="resources">
+        <div class="section-header">
+          <p class="eyebrow">Capability-first resources</p>
+          <h2>Datasets should be grouped by what they let you verify</h2>
+          <p>
+            The manuscript treats a benchmark as more than a dataset name. The task schema,
+            protocol, and evaluation script jointly determine what claims can be audited.
+          </p>
+        </div>
+
+        <div class="table-card">
+          <div class="table-head">
+            <h3>Selected benchmark capability matrix</h3>
+            <p>Web summary adapted from the survey manuscript rather than the full paper table.</p>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Dataset</th>
+                  <th>Modality</th>
+                  <th>Pair</th>
+                  <th>Explanation</th>
+                  <th>Target BL</th>
+                  <th>Role</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>ECF 1.0</td>
+                  <td>T / A / V</td>
+                  <td>Yes</td>
+                  <td>No</td>
+                  <td>BL-2</td>
+                  <td>Pair extraction benchmark</td>
+                </tr>
+                <tr>
+                  <td>ECF 2.0</td>
+                  <td>T / A / V</td>
+                  <td>Yes</td>
+                  <td>No</td>
+                  <td>BL-2</td>
+                  <td>Pair extraction benchmark</td>
+                </tr>
+                <tr>
+                  <td>ConvECPE</td>
+                  <td>T / A / V</td>
+                  <td>Yes</td>
+                  <td>No</td>
+                  <td>BL-2</td>
+                  <td>Pair extraction benchmark</td>
+                </tr>
+                <tr class="highlight-row">
+                  <td>ECGF</td>
+                  <td>T / A / V</td>
+                  <td>Yes</td>
+                  <td>Yes</td>
+                  <td>BL-1</td>
+                  <td>Conversational explanation benchmark</td>
+                </tr>
+                <tr>
+                  <td>ECEM</td>
+                  <td>T / V</td>
+                  <td>No</td>
+                  <td>Yes</td>
+                  <td>BL-0</td>
+                  <td>Pointer-free generation benchmark</td>
+                </tr>
+                <tr>
+                  <td>AMT / DEEMO-MER</td>
+                  <td>Mixed</td>
+                  <td>Partial</td>
+                  <td>Yes</td>
+                  <td>BL-0 or BL-1</td>
+                  <td>Auxiliary explanation resources</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-note">
+            The survey separates conversational MEC resources from auxiliary MER/caption datasets so
+            that “emotion explanation” does not get conflated with “emotion causality in conversation.”
+          </p>
+        </div>
+      </section>
+
+      <section class="section reveal" id="taxonomy">
+        <div class="section-header">
+          <p class="eyebrow">Pair extraction taxonomy</p>
+          <h2>Mechanisms matter because failure modes follow the interface</h2>
+        </div>
+
+        <div class="dual-grid">
+          <figure class="figure-panel">
+            <img src="../assets/images/pair-taxonomy.svg" alt="Pair taxonomy figure">
+            <figcaption>Mechanism-centered taxonomy of multimodal pair extraction paradigms.</figcaption>
+          </figure>
+          <article class="feature-card">
+            <span class="card-kicker">RQ3 focus</span>
+            <ul class="check-list">
+              <li>How the model defines the alignment object.</li>
+              <li>Where multimodal information enters the decision path.</li>
+              <li>Which failure modes dominate under long context, speaker interaction, or noise.</li>
+              <li>Why paradigm shifts often trade one bottleneck for another.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal" id="generation">
+        <div class="section-header">
+          <p class="eyebrow">Generation interfaces</p>
+          <h2>Fluent text is not the same thing as auditable text</h2>
+          <p>
+            The survey groups generated rationales by bridgeability level. The key distinction is
+            not whether the language sounds good, but whether evidence pointers can be recovered and
+            checked.
+          </p>
+        </div>
+
+        <div class="dual-grid">
+          <figure class="figure-panel">
+            <img src="../assets/images/gen-map.svg" alt="Bridgeability-first map for multimodal rationales">
+            <figcaption>Generation methods grouped by parsability and grounding strength.</figcaption>
+          </figure>
+          <article class="feature-card">
+            <span class="card-kicker">BL ladder</span>
+            <ul class="check-list">
+              <li><strong>BL-0:</strong> pointer-free free text, readable but hard to audit.</li>
+              <li><strong>BL-1:</strong> evidence-aware text with explicit pointers, bridgeable.</li>
+              <li><strong>BL-2:</strong> alignment-object-native outputs such as pair sets or spans.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal" id="bridge-link">
+        <div class="section-header">
+          <p class="eyebrow">Why this matters for PaceVer</p>
+          <h2>The survey is the conceptual front-end of BridgeProt</h2>
+        </div>
+
+        <div class="callout-grid">
+          <article class="feature-card">
+            <span class="card-kicker">For the field</span>
+            <h3>It explains the evaluation fracture</h3>
+            <p>
+              Pair extraction and explanation/generation are often reported under incompatible
+              evaluation regimes. The survey makes that fracture explicit.
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="card-kicker">For PaceVer</span>
+            <h3>It justifies the bridge layer</h3>
+            <p>
+              BridgeProt becomes much easier to understand once the survey shows that the field lacks
+              a stable parse-back-compatible interface between pairs and explanations.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer surface reveal">
+      <div>
+        <strong>Survey</strong>
+        <p>Field-level framing for multimodal emotion causality, grounded explanations, and evaluation bridges.</p>
+      </div>
+      <div class="footer-links">
+        <a href="../">Home</a>
+        <a href="../ext/">PaceExt</a>
+        <a href="../bridge/">BridgeProt</a>
+        <a href="https://github.com/panzhzh/PaceVer-web" target="_blank" rel="noreferrer">Site repository</a>
+      </div>
+      <p class="footer-meta">Website snapshot <span class="js-year"></span>. Built for GitHub Pages.</p>
+    </footer>
+  </div>
+
+  <script src="../assets/app.js"></script>
+</body>
+</html>
