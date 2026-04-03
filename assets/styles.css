@@ -10,10 +10,10 @@
   --accent: #18639d;
   --accent-strong: #134d7a;
   --accent-soft: rgba(24, 99, 157, 0.12);
-  --accent-alt: #df7f2f;
-  --accent-alt-soft: rgba(223, 127, 47, 0.14);
+  --accent-alt: #3b7fbc;
+  --accent-alt-soft: rgba(59, 127, 188, 0.12);
   --halo-a: rgba(24, 99, 157, 0.16);
-  --halo-b: rgba(223, 127, 47, 0.14);
+  --halo-b: rgba(59, 127, 188, 0.12);
   --shadow: 0 18px 42px rgba(20, 37, 61, 0.08);
   --radius-xl: 28px;
   --radius-lg: 22px;
@@ -25,30 +25,30 @@ body[data-theme="ext"] {
   --accent: #165f95;
   --accent-strong: #11476f;
   --accent-soft: rgba(22, 95, 149, 0.12);
-  --accent-alt: #e18836;
-  --accent-alt-soft: rgba(225, 136, 54, 0.14);
+  --accent-alt: #4d89c0;
+  --accent-alt-soft: rgba(77, 137, 192, 0.12);
   --halo-a: rgba(22, 95, 149, 0.18);
-  --halo-b: rgba(225, 136, 54, 0.14);
+  --halo-b: rgba(77, 137, 192, 0.12);
 }
 
 body[data-theme="bridge"] {
-  --accent: #cc7226;
-  --accent-strong: #99561d;
-  --accent-soft: rgba(204, 114, 38, 0.12);
-  --accent-alt: #1a659d;
-  --accent-alt-soft: rgba(26, 101, 157, 0.12);
-  --halo-a: rgba(26, 101, 157, 0.16);
-  --halo-b: rgba(204, 114, 38, 0.14);
+  --accent: #1b659a;
+  --accent-strong: #144d75;
+  --accent-soft: rgba(27, 101, 154, 0.12);
+  --accent-alt: #5c8fbc;
+  --accent-alt-soft: rgba(92, 143, 188, 0.12);
+  --halo-a: rgba(27, 101, 154, 0.16);
+  --halo-b: rgba(92, 143, 188, 0.12);
 }
 
 body[data-theme="survey"] {
   --accent: #1b5f90;
   --accent-strong: #14496e;
   --accent-soft: rgba(27, 95, 144, 0.12);
-  --accent-alt: #d47a2f;
-  --accent-alt-soft: rgba(212, 122, 47, 0.14);
+  --accent-alt: #4f86b6;
+  --accent-alt-soft: rgba(79, 134, 182, 0.12);
   --halo-a: rgba(27, 95, 144, 0.16);
-  --halo-b: rgba(212, 122, 47, 0.14);
+  --halo-b: rgba(79, 134, 182, 0.12);
 }
 
 * {
@@ -282,7 +282,7 @@ pre {
   gap: 0.55rem;
   margin: 0 0 0.95rem;
   color: var(--accent);
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -308,20 +308,20 @@ h2 {
 }
 
 h1 {
-  font-size: clamp(2.45rem, 5.4vw, 4.3rem);
-  margin-bottom: 0.8rem;
+  font-size: clamp(2.05rem, 4.4vw, 3.45rem);
+  margin-bottom: 0.7rem;
   font-weight: 700;
 }
 
 h2 {
-  font-size: clamp(1.75rem, 3.2vw, 2.5rem);
-  margin-bottom: 0.85rem;
+  font-size: clamp(1.52rem, 2.5vw, 2.05rem);
+  margin-bottom: 0.75rem;
   font-weight: 700;
 }
 
 h3 {
-  font-size: 1.12rem;
-  margin-bottom: 0.62rem;
+  font-size: 1.02rem;
+  margin-bottom: 0.55rem;
   font-weight: 600;
 }
 
@@ -332,7 +332,7 @@ h3 {
 .lead {
   margin: 0 0 0.9rem;
   max-width: 40rem;
-  font-size: 1.06rem;
+  font-size: 1rem;
 }
 
 .hero-note,
@@ -375,7 +375,7 @@ h3 {
   border-radius: 999px;
   background: var(--accent-soft);
   color: var(--accent);
-  font-size: 0.76rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.09em;
   text-transform: uppercase;
@@ -385,13 +385,13 @@ h3 {
   padding: 0.95rem 1rem;
   border-radius: 18px;
   box-shadow: none;
-  background: linear-gradient(180deg, rgba(24, 99, 157, 0.06), rgba(255, 255, 255, 0.72));
+  background: linear-gradient(180deg, rgba(24, 99, 157, 0.05), rgba(255, 255, 255, 0.72));
 }
 
 .stat-value {
   display: block;
   margin-top: 0.38rem;
-  font-size: clamp(1.55rem, 3vw, 2.1rem);
+  font-size: clamp(1.3rem, 2.2vw, 1.7rem);
   line-height: 0.94;
   font-weight: 700;
 }
@@ -508,8 +508,8 @@ h3 {
   border-radius: 16px;
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.58);
-  font-family: "Fraunces", serif;
-  font-size: 1.05rem;
+  font-size: 0.96rem;
+  font-weight: 600;
 }
 
 .milestone-card {
@@ -569,7 +569,7 @@ th {
 
 .table-note {
   margin-top: 0.9rem;
-  font-size: 0.92rem;
+  font-size: 0.88rem;
 }
 
 .banner-card {
@@ -698,11 +698,11 @@ th {
   }
 
   h1 {
-    font-size: clamp(2.15rem, 12vw, 3.1rem);
+    font-size: clamp(1.85rem, 10vw, 2.6rem);
   }
 
   h2 {
-    font-size: clamp(1.55rem, 9vw, 2.15rem);
+    font-size: clamp(1.38rem, 7vw, 1.8rem);
   }
 
   table {
