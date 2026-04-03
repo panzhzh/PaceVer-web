@@ -247,7 +247,8 @@ pre {
 
 .hero {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1.12fr) minmax(18rem, 0.78fr);
+  align-items: start;
   gap: 1.05rem;
   padding: clamp(1.35rem, 2.8vw, 1.8rem);
 }
@@ -272,7 +273,8 @@ pre {
 
 .hero-panel {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: 1fr;
+  align-content: start;
   gap: 0.8rem;
 }
 
@@ -490,6 +492,49 @@ h3 {
 .figure-panel figcaption {
   margin-top: 0.8rem;
   font-size: 0.93rem;
+}
+
+.pdf-object {
+  display: block;
+  width: 100%;
+  height: 340px;
+  border: 1px solid rgba(20, 37, 61, 0.08);
+  border-radius: 16px;
+  background: #fff;
+}
+
+.text-link {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.text-link:hover {
+  text-decoration: underline;
+}
+
+.link-stack {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.link-stack a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.hero-note a,
+.feature-card a,
+.table-note a,
+.table-card a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.hero-note a:hover,
+.feature-card a:hover,
+.table-note a:hover,
+.table-card a:hover {
+  text-decoration: underline;
 }
 
 .code-card pre {

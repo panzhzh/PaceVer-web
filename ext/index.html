@@ -231,6 +231,188 @@
             manuscript and as PaceExt in the thesis-level project structure.
           </p>
         </div>
+
+        <div class="table-card">
+          <div class="table-head">
+            <h3>Modality-specific TRecAM breakdown</h3>
+            <p>
+              The paper reports not only pair scores but also emotion-turn and cause-turn F1 across
+              text-only and multimodal settings.
+            </p>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Setting</th>
+                  <th>Emotion F1</th>
+                  <th>Cause F1</th>
+                  <th>Pair Precision</th>
+                  <th>Pair Recall</th>
+                  <th>Pair F1</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Text-only</td>
+                  <td>79.04 ± 0.12</td>
+                  <td>73.23 ± 0.24</td>
+                  <td>53.12 ± 0.89</td>
+                  <td>61.22 ± 0.56</td>
+                  <td>56.88 ± 0.50</td>
+                </tr>
+                <tr>
+                  <td>+ Audio</td>
+                  <td>79.40 ± 0.42</td>
+                  <td>73.19 ± 0.59</td>
+                  <td>52.40 ± 2.86</td>
+                  <td>62.45 ± 4.29</td>
+                  <td>56.86 ± 1.05</td>
+                </tr>
+                <tr>
+                  <td>+ Video</td>
+                  <td>79.00 ± 0.23</td>
+                  <td>72.77 ± 0.80</td>
+                  <td>52.85 ± 2.35</td>
+                  <td>62.19 ± 2.59</td>
+                  <td>57.07 ± 0.74</td>
+                </tr>
+                <tr class="highlight-row">
+                  <td>+ Audio + Video</td>
+                  <td>79.33 ± 0.30</td>
+                  <td>73.26 ± 0.80</td>
+                  <td>52.16 ± 0.68</td>
+                  <td>65.12 ± 1.71</td>
+                  <td>57.92 ± 0.52</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="ablations">
+        <div class="section-header">
+          <p class="eyebrow">Ablations</p>
+          <h2>The page should keep the ablation assets, not only the headline result</h2>
+          <p>
+            Two tables matter especially for understanding why the model works: the training-schedule
+            comparison and the core temporal-prior ablation block.
+          </p>
+        </div>
+
+        <div class="table-card">
+          <div class="table-head">
+            <h3>Effect of training schedules</h3>
+            <p>
+              Single-stage joint training hurts structured pair extraction, while the pair-preserving
+              schedule keeps the pair scorer stable.
+            </p>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Setting</th>
+                  <th>Pair F1</th>
+                  <th>Pair AUPRC</th>
+                  <th>Emotion F1</th>
+                  <th>Cause F1</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="highlight-row">
+                  <td>TRecAM</td>
+                  <td>57.92 ± 0.52</td>
+                  <td>55.58 ± 0.57</td>
+                  <td>79.33 ± 0.30</td>
+                  <td>73.26 ± 0.80</td>
+                </tr>
+                <tr>
+                  <td>Stage A only</td>
+                  <td>57.92 ± 0.52</td>
+                  <td>55.58 ± 0.57</td>
+                  <td>78.52 ± 0.84</td>
+                  <td>72.34 ± 0.46</td>
+                </tr>
+                <tr>
+                  <td>TRecAM-Joint</td>
+                  <td>56.55 ± 0.74</td>
+                  <td>55.24 ± 0.56</td>
+                  <td>79.06 ± 0.63</td>
+                  <td>72.51 ± 0.81</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-head">
+            <h3>Core temporal-prior ablations</h3>
+            <p>
+              Dialogue-conditioned and shared temporal priors provide the largest gains for pair
+              extraction, while removing either KS or SG weakens the system.
+            </p>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Variant</th>
+                  <th>Pair F1</th>
+                  <th>Pair AUPRC</th>
+                  <th>Emotion F1</th>
+                  <th>Cause F1</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="highlight-row">
+                  <td>TRecAM</td>
+                  <td>57.92 ± 0.52</td>
+                  <td>55.58 ± 0.57</td>
+                  <td>79.33 ± 0.30</td>
+                  <td>73.26 ± 0.80</td>
+                </tr>
+                <tr>
+                  <td>without KS</td>
+                  <td>56.79 ± 0.24</td>
+                  <td>52.92 ± 2.18</td>
+                  <td>78.89 ± 0.44</td>
+                  <td>73.17 ± 0.32</td>
+                </tr>
+                <tr>
+                  <td>without SG</td>
+                  <td>57.23 ± 0.79</td>
+                  <td>55.46 ± 0.81</td>
+                  <td>78.99 ± 0.46</td>
+                  <td>72.97 ± 0.42</td>
+                </tr>
+                <tr>
+                  <td>Independent priors</td>
+                  <td>56.96 ± 0.51</td>
+                  <td>55.66 ± 0.19</td>
+                  <td>79.13 ± 1.09</td>
+                  <td>72.88 ± 0.56</td>
+                </tr>
+                <tr>
+                  <td>Global priors</td>
+                  <td>56.78 ± 0.05</td>
+                  <td>56.24 ± 0.10</td>
+                  <td>79.10 ± 0.24</td>
+                  <td>72.45 ± 0.23</td>
+                </tr>
+                <tr>
+                  <td>BASE (no ATDG/DP)</td>
+                  <td>55.30 ± 0.16</td>
+                  <td>53.20 ± 0.68</td>
+                  <td>78.69 ± 0.20</td>
+                  <td>72.43 ± 0.55</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </section>
 
       <section class="section reveal" id="figures">
@@ -256,6 +438,103 @@
             <img src="../assets/images/missing-modality.svg" alt="Missing modality robustness figure">
             <figcaption>Dialogue-paced temporal priors stay useful when modality availability degrades.</figcaption>
           </figure>
+        </div>
+
+        <div class="dual-grid" style="margin-top: 1rem;">
+          <figure class="figure-panel">
+            <object class="pdf-object" data="../assets/images/paceext-data-efficiency.pdf" type="application/pdf">
+              <a class="text-link" href="../assets/images/paceext-data-efficiency.pdf" target="_blank" rel="noreferrer">Open data-efficiency figure</a>
+            </object>
+            <figcaption>
+              Data efficiency on ECF: larger gains under low-data fractions indicate that the
+              dialogue-paced prior remains useful when supervision is scarce.
+            </figcaption>
+          </figure>
+          <figure class="figure-panel">
+            <img src="../assets/images/paceext-case-study.svg" alt="PaceExt case study figure">
+            <figcaption>
+              Pair-level case study showing how dialogue-adaptive temporal decay changes pair ranking.
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="dual-grid" style="margin-top: 1rem;">
+          <figure class="figure-panel">
+            <object class="pdf-object" data="../assets/images/paceext-sanity.pdf" type="application/pdf">
+              <a class="text-link" href="../assets/images/paceext-sanity.pdf" target="_blank" rel="noreferrer">Open sanity perturbation figure</a>
+            </object>
+            <figcaption>
+              Eval-only sanity perturbations show stable behavior under mild interventions and degradation under adversarial swaps.
+            </figcaption>
+          </figure>
+          <figure class="figure-panel">
+            <object class="pdf-object" data="../assets/images/paceext-psi-noise.pdf" type="application/pdf">
+              <a class="text-link" href="../assets/images/paceext-psi-noise.pdf" target="_blank" rel="noreferrer">Open robustness figure</a>
+            </object>
+            <figcaption>
+              Inference-only corruption of dialogue pace statistics causes graceful rather than catastrophic degradation.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section reveal" id="low-data">
+        <div class="section-header">
+          <p class="eyebrow">Low-data regime</p>
+          <h2>Exact data-efficiency numbers are also part of the asset pool</h2>
+        </div>
+
+        <div class="table-card">
+          <div class="table-head">
+            <h3>ECF data-efficiency table</h3>
+            <p>
+              These are the exact values behind the data-efficiency figure, included here because
+              they are important research assets rather than decorative appendix material.
+            </p>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Train fraction</th>
+                  <th>Pair F1</th>
+                  <th>Pair AUPRC</th>
+                  <th>Emotion F1</th>
+                  <th>Cause F1</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>25%</td>
+                  <td>52.24 ± 0.93</td>
+                  <td>47.21 ± 0.84</td>
+                  <td>73.01 ± 1.70</td>
+                  <td>67.19 ± 1.29</td>
+                </tr>
+                <tr>
+                  <td>50%</td>
+                  <td>55.13 ± 0.62</td>
+                  <td>52.33 ± 0.82</td>
+                  <td>77.98 ± 0.56</td>
+                  <td>70.70 ± 0.51</td>
+                </tr>
+                <tr>
+                  <td>75%</td>
+                  <td>56.53 ± 0.92</td>
+                  <td>54.33 ± 0.63</td>
+                  <td>78.65 ± 0.26</td>
+                  <td>72.03 ± 0.20</td>
+                </tr>
+                <tr class="highlight-row">
+                  <td>100%</td>
+                  <td>57.92 ± 0.52</td>
+                  <td>55.58 ± 0.57</td>
+                  <td>79.33 ± 0.30</td>
+                  <td>73.26 ± 0.80</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 
